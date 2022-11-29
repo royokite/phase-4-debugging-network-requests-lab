@@ -64,10 +64,31 @@ developing your own process.
 
   - How I debugged:
 
+    - Tried to create a new toy, accessed developer tools network tab to check the error given:
+
+      - error: "Internal Server Error"
+      - exception: "#<NameError: uninitialized constant ToysController::Toys>"
+      - status: 500
+
+    - Changed the Toys.create(toy_params) method to Toy.create(toy_params) removing the s as Toy is the right model name.
+    - Retried creating a new toy, Jessie from Toy Story, error resolved.
+
 - Update the number of likes for a toy
 
   - How I debugged:
+    - Clicked on the like to see what response I got, SyntaxError: Unexpected end of JSON input.
+    - This indicated a lack of a proper response format from the server when fetching in the ToyCard component's handleLikeClick function.
+    - Resolved this error by having the Controller#update method render a response in JSON format.
 
 - Donate a toy to Goodwill (and delete it from our database)
 
   - How I debugged:
+
+    - Tried to donate a toy, accessed developer tools network tab to check the error given:
+
+      - error: "Not Foundr"
+      - exception: "#<ActionController::RoutingError: No route matches [DELETE] \"/toys/1\">"
+      - status: 404
+
+    - This indicated a lack of destroy resource in the routes which I added.
+    - Retried donating a new toy, Woody, it got deleted from the database as well resolving the error.
